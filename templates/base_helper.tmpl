@@ -1,0 +1,28 @@
+<metal:block xmlns:tal="http://xml.zope.org/namespaces/tal"
+			 xmlns:metal="http://xml.zope.org/namespaces/metal"
+			 xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+
+<metal:block metal:define-macro="html_stylesheets_bundled_cdn">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous" />
+</metal:block>
+
+
+<metal:block metal:define-macro="html_stylesheets_nonbundled_cdn">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous" />
+</metal:block>
+<metal:block metal:define-macro="html_stylesheets_nonbundled_nocdn">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet"
+          type="text/css" />
+</metal:block>
+<metal:block metal:define-macro="html_stylesheets_nonbundled" >
+    <link href="/assets/css/colorbox.css" rel="stylesheet"
+          type="text/css" />
+</metal:block>
+
+</metal:block>
