@@ -10,17 +10,17 @@
 </metal:block>
 
 
-<metal:block metal:define-macro="html_stylesheets_nonbundled_cdn">
+<metal:block metal:define-macro="html_stylesheets_non_bundled_cdn">
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous" />
 </metal:block>
-<metal:block metal:define-macro="html_stylesheets_nonbundled_nocdn">
+<metal:block metal:define-macro="html_stylesheets_non_bundled_nocdn">
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet"
           type="text/css" />
 </metal:block>
-<metal:block metal:define-macro="html_stylesheets_nonbundled" >
+<metal:block metal:define-macro="html_stylesheets_non_bundled" >
     <link href="/assets/css/colorbox.css" rel="stylesheet"
           type="text/css" />
 </metal:block>
