@@ -25,52 +25,64 @@
           type="text/css" />
 </metal:block>
 
+<metal:block metal:define-macro="html_navigation_links">
+  <metal:block metal:use-macro="macro:html_navbar_navigation_links" />
+</metal:block>
 
-<metal:block metal:define-macro="html_navigation_links"
+<metal:block metal:define-macro="html_right_navbar_navigation_links">
+  <metal:block metal:use-macro="macro:html_navbar_navigation_links" />
+</metal:block>
+
+<metal:block metal:define-macro="html_left_navbar_navigation_links">
+  <metal:block metal:use-macro="macro:html_navbar_navigation_links" />
+</metal:block>
+
+
+<metal:block metal:define-macro="html_navbar_navigation_links"
              tal:define="messages nocall:options/messages;
 					     lang options/lang;
 					     permalink options/permalink;
 					     rel_link nocall:options/rel_link">
   <tal:block tal:repeat="url_text options/navigation_links/?lang">
     <tal:block tal:define="url python:url_text[0]; text python:url_text[1]">
-            <li tal:condition="python:isinstance(url, tuple)" class="dropdown">
-              <a href="#" class="dropdown-toggle"
-                 data-toggle="dropdown" aria-haspopup="true"
-                 aria-expanded="false">
-              ${text} <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-                <tal:block tal:repeat="suburl_text url">
-				  <tal:block tal:switch="python:rel_link(permalink, suburl[0]) == '#'">
-					<li tal:case="True"
-						class="active">
-					  <a href="${permalink}">${python:suburl_text[1]}<span class="sr-only">${python:messages("(active)", lang)}</span></a>
-					</li>
-					<li tal:case="False">
-					  <a
-						  href="${python:suburl[0]}">${python:suburl_text[1]}</a>
-					</li>
-				  </tal:block>
-				</tal:block>
-            </ul>
-            </li>
-            <tal:block tal:condition="python:not isinstance(url, tuple)">
-			  <tal:block tal:switch="python:rel_link(permalink, url) == '#'">
-				<li tal:case="True" class="active">
-				  <a href="${permalink}">${text}<span class="sr-only"> ${python:messages("(active)", lang)}</span></a>
-				</li>
-				<li tal:case="False">
-				  <a href="${url}">${text}</a>
-				</li>
-			  </tal:block>
+      <li tal:condition="python:isinstance(url, tuple)" class="dropdown">
+        <a href="#" class="dropdown-toggle"
+           data-toggle="dropdown" aria-haspopup="true"
+           aria-expanded="false">
+          ${text} <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <tal:block tal:repeat="suburl_text url">
+			<tal:block tal:switch="python:rel_link(permalink, suburl_text[0]) == '#'">
+			  <li tal:case="True"
+				  class="active">
+				<a href="${permalink}">${python:suburl_text[1]}<span class="sr-only">${python:messages("(active)", lang)}</span></a>
+			  </li>
+			  <li tal:case="False">
+				<a
+					href="${python:suburl_text[0]}">${python:suburl_text[1]}</a>
+			  </li>
 			</tal:block>
+		  </tal:block>
+        </ul>
+      </li>
+      <tal:block tal:condition="python:not isinstance(url, tuple)">
+		<tal:block tal:switch="python:rel_link(permalink, url) == '#'">
+		  <li tal:case="True" class="active">
+			<a href="${permalink}">${text}<span class="sr-only"> ${python:messages("(active)", lang)}</span></a>
+		  </li>
+		  <li tal:case="False">
+			<a href="${url}">${text}</a>
+		  </li>
+		</tal:block>
+	  </tal:block>
     </tal:block>
   </tal:block>
 </metal:block>
 
-
+<!--! class="navbar navbar-inverse navbar-static-top"-->
 <nav metal:define-macro="html_nav_menu"
-     class="navbar navbar-inverse navbar-static-top"
+     class="navbar navbar-default navbar-custom navbar-fixed-top"
      tal:define="messages nocall:options/messages;
                  abs_link nocall:options/abs_link;
                  _link nocall:options/_link;
@@ -79,14 +91,14 @@
                  blog_title options/blog_title">
 
     <div class="container"><!-- This keeps the margins nice -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed"
+        <div class="navbar-header page-scroll">
+            <button type="button"
+                    class="navbar-toggle collapsed"
                     data-toggle="collapse" data-target="#bs-navbar"
                     aria-controls="bs-navbar" aria-expanded="false">
               <span class="sr-only">${python:messages("Toggle navigation")}</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
+              <i class="fa fa-bars">
+              </i>
             </button>
             <a class="navbar-brand" href="${python:abs_link(_link('root', None, lang))}">
               <img src="${logo_url}" alt="${blog_title}" id="logo"
@@ -97,7 +109,10 @@
         </div><!-- /.navbar-header -->
         <div class="collapse navbar-collapse" id="bs-navbar" aria-expanded="false">
             <ul class="nav navbar-nav">
-              <metal:block use-macro="macro:html_navigation_links" />
+              <metal:block define-slot="left-navbar">
+                <metal:block
+                    use-macro="macro:html_left_navbar_navigation_links" />
+              </metal:block>
                 <!--! ${template_hooks['menu']()} -->
             </ul>
             <div class="searchform" role="search"
@@ -106,6 +121,9 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <metal:block define-slot="belowtitle">
+                <metal:block
+                    use-macro="macro:html_right_navbar_navigation_links" />
+
                   <!--!
                       %if len(translations) > 1:
                       <li>${base.html_translations()}</li>
