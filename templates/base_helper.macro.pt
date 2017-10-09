@@ -39,8 +39,7 @@
 
 
 <metal:block metal:define-macro="html_navbar_navigation_links"
-             tal:define="messages nocall:options/messages;
-					     lang options/lang;
+             tal:define="lang options/lang;
 					     permalink options/permalink;
 					     rel_link nocall:options/rel_link">
   <tal:block tal:repeat="url_text options/navigation_links/?lang">
@@ -56,8 +55,12 @@
 			<tal:block tal:switch="python:rel_link(permalink, suburl_text[0]) == '#'">
 			  <li tal:case="True"
 				  class="active">
-				<a href="${permalink}">${python:suburl_text[1]}<span class="sr-only">${python:messages("(active)", lang)}</span></a>
-			  </li>
+				<a href="${permalink}">${python:suburl_text[1]}
+			    <span class="sr-only"
+                      i18n:translate=""
+                      i18n:target="lang">(active)</span>
+                </a>
+              </li>
 			  <li tal:case="False">
 				<a
 					href="${python:suburl_text[0]}">${python:suburl_text[1]}</a>
@@ -69,7 +72,10 @@
       <tal:block tal:condition="python:not isinstance(url, tuple)">
 		<tal:block tal:switch="python:rel_link(permalink, url) == '#'">
 		  <li tal:case="True" class="active">
-			<a href="${permalink}">${text}<span class="sr-only"> ${python:messages("(active)", lang)}</span></a>
+			<a href="${permalink}">${text}<span class="sr-only"
+                      i18n:translate=""
+                      i18n:target="lang">(active)</span>
+            </a>
 		  </li>
 		  <li tal:case="False">
 			<a href="${url}">${text}</a>
@@ -83,8 +89,7 @@
 <!--! class="navbar navbar-inverse navbar-static-top"-->
 <nav metal:define-macro="html_nav_menu"
      class="navbar navbar-default navbar-custom navbar-fixed-top"
-     tal:define="messages nocall:options/messages;
-                 abs_link nocall:options/abs_link;
+     tal:define="abs_link nocall:options/abs_link;
                  _link nocall:options/_link;
                  logo_url options/logo_url;
                  lang options/lang;
@@ -96,7 +101,7 @@
                     class="navbar-toggle collapsed"
                     data-toggle="collapse" data-target="#bs-navbar"
                     aria-controls="bs-navbar" aria-expanded="false">
-              <span class="sr-only">${python:messages("Toggle navigation")}</span>
+              <span class="sr-only" i18n:translate="">Toggle navigation</span>
               <i class="fa fa-bars">
               </i>
             </button>
