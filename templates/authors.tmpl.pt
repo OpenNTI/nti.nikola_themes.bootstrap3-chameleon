@@ -7,11 +7,6 @@
 <!--! <%inherit file="base.tmpl"/> -->
 <!--! <%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/> -->
 
-<metal:block fill-slot="extra_head">
-  <tal:block
-      tal:replace="python:request.feed_translations_head(kind=options.get('kind'),
-                   feeds=False)" />
-</metal:block>
 
 <metal:block fill-slot="content">
 <tal:block tal:condition="options/items">
@@ -21,10 +16,9 @@
         </div>
         <ul class="list-inline"
             tal:define="hidden_authors options/hidden_authors">
-          <li tal:repeat="text_link options/items"
-              tal:omit-tag="python:text_link[0] in hidden_authors">
+          <li tal:repeat="(text, link) options/items"
+              tal:omit-tag="python:text in hidden_authors">
             <a class="reference badge"
-               tal:define="link python:text_link[1]; text python:text_link[0]"
                href="${link}">${text}</a>
           </li>
         </ul>
