@@ -10,7 +10,6 @@
 <article class="authorindex"
          metal:fill-slot="content"
          tal:condition="options/items">
-    <?python import pdb; pdb.set_trace() ?>
     <h2 i18n:translate="">Authors</h2>
     <div class="metadata">
             <!--! ${feeds_translations.translation_link(kind)} -->
