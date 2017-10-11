@@ -13,14 +13,6 @@
 
   <!-- Viewlets and viewlet managers -->
 
-  <browser:viewlet
-      name="default_extra_head"
-      manager=".interfaces.IHtmlHeadViewletManager"
-      template="v_authors_extra_head.pt"
-      permission="zope.Public"
-      layer=".interfaces.IAuthorsPageKind"
-      weight="0"
-      />
 
   <!-- Override extra js -->
   <browser:viewlet

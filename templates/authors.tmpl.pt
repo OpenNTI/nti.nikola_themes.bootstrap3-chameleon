@@ -7,21 +7,22 @@
 <!--! <%inherit file="base.tmpl"/> -->
 <!--! <%namespace name="feeds_translations" file="feeds_translations_helper.tmpl" import="*"/> -->
 
-
-<metal:block fill-slot="content">
-<tal:block tal:condition="options/items">
-        <h2 i18n:translate="">Authors</h2>
-        <div class="metadata">
+<article class="authorindex"
+         metal:fill-slot="content"
+         tal:condition="options/items">
+    <?python import pdb; pdb.set_trace() ?>
+    <h2 i18n:translate="">Authors</h2>
+    <div class="metadata">
             <!--! ${feeds_translations.translation_link(kind)} -->
-        </div>
-        <ul class="list-inline"
-            tal:define="hidden_authors options/hidden_authors">
-          <li tal:repeat="(text, link) options/items"
-              tal:omit-tag="python:text in hidden_authors">
+    </div>
+
+    <ul class="list-inline"
+        tal:define="hidden_authors options/hidden_authors">
+        <li tal:repeat="(text, link) options/items"
+            tal:omit-tag="python:text in hidden_authors">
             <a class="reference badge"
                href="${link}">${text}</a>
-          </li>
-        </ul>
-</tal:block>
-</metal:block>
+        </li>
+    </ul>
+</article>
 </html>
